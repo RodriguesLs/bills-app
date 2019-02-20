@@ -1,0 +1,38 @@
+<%= form_with(model: bill, local: true) do |form| %>
+  <% if bill.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(bill.errors.count, "error") %> prohibited this bill from being saved:</h2>
+
+      <ul>
+      <% bill.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.number_field :status %>
+  </div>
+
+  <div class="field">
+    <%= form.label :target %>
+    <%= form.text_field :target %>
+  </div>
+
+  <div class="field">
+    <%= form.label 'Products' %>
+    <%# aqui é um checkbox normal só que dentro de um for que passa por todos os produtos para poder listar todos os produtos disponiveis %>
+    <% Product.all.each do |product| %>
+      <label>  
+        <%= check_box :bill, :product_ids, { multiple: true }, product.id %>
+        <%= product.name %>
+      </label>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

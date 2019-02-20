@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @bill.status %>
+</p>
+
+<p>
+  <strong>Target:</strong>
+  <%= @bill.target %>
+</p>
+
+<p>
+  <strong>Products: </strong>
+  <%= @bill.products.pluck(:name).to_sentence %>
+</p>
+
+<%= link_to 'Edit', edit_bill_path(@bill) %> |
+<%= link_to 'Back', bills_path %>
